@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Weather Fetch API</title>
+  </head>
+  <body>
+    <!-- Root container for react components -->
+    <div id='root'></div>
+    
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    
+    <script type="text/babel">
+      class WeatherFetch extends React.Component {
+       constructor(props) {
+          super(props);
+          this.state = {temp: 0, desc: '', imgURL: ''};
+        }
+
+        componentDidMount() {
+          fetch('http://api.openweathermap.org/data/2.5/weather?q=London&APPID=32ebcdcea6b796e77f167dbfa6c9d366')
+          .then((response) => response.json())
+          .then((responseData) => {
+            console.log(responseData);
+            this.setState({
+              temp: responseData.main.temp - 273.15,
+              desc: responseData.weather[0].description,
+              imgURL: 'http://openweathermap.org/img/w/' + responseData.weather[0].icon + '.png'
+            });
+          })
+        }
+
+        render() {
+          return (
+          <div>Temperature: {this.state.temp} Celsius<br />Weather: {this.state.desc}<br /><img src={this.state.imgURL} /></div>
+          );
+        }
+      }
+      
+      ReactDOM.render(<WeatherFetch />, document.getElementById('root'));
+    </script>
+  </body>
+</html>
