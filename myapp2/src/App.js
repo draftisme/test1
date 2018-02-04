@@ -44,11 +44,8 @@ class App extends Component {
         </div>
         <div>
           <table>
-            <thead>
-              <th>Date</th>
-              <th>Description</th>
-            </thead>
             <tbody>
+              <tr><th>Date</th><th>Description</th></tr>
               {this.state.todos.map((item, index) => <tr key={index}><td>{item.date}</td><td>{item.description}</td><button onClick={() => this.deleteBtn(index)}>Delete</button></tr>)}
             </tbody>
           </table>
