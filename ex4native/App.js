@@ -29,7 +29,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Shopping list</Text>
+        <Text>Shopping List</Text>
         <TextInput style={styles.myInput} onChangeText={(item) => this.setState({item})} value={this.state.item} />
         <Button onPress={this.addItem} title='Add' />
         <Button onPress={this.clearList} title='Clear' />
